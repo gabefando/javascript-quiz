@@ -11,6 +11,7 @@ var desc = document.getElementById("desc");
 var questionNum = 0;
 var aBtnClicked = 0;
 var bBtnClicked = 0;
+var dBtnClicked = 0;
 var points = 0;
 var t = 0;
 
@@ -30,6 +31,7 @@ function quizStart() {
     dBtn.classList.remove("hiddenBtn");
     aBtnClicked = 0;
     bBtnClicked = 0;
+    dBtnClicked = 0;
     t = 31;
     questionNum += 1;
     if (questionNum == 1) {
@@ -99,6 +101,35 @@ function bBtnFunc() {
     }
 }
 
+function cBtnFunc () {
+    points -= 20;
+    score.innerHTML = points;
+}
+
+function dBtnFunc() {
+    dBtnClicked += 1;
+    if (dBtnClicked == 1 && questionNum == 3) {
+        points += 100;
+        score.innerHTML = points;
+        t = 31;
+        questionNum += 1;
+        window.location.href = "./leaderboard.html";
+        recordScore();
+    }
+}
+
+function recordScore() {
+    var nameput = document.getElementById("name");
+    var scoreput = document.getElementById("score")
+    var ask = confirm("Do you want to save your score to the leaderboard?");
+    if (ask == true) {
+        var nameInput = prompt("Write your initials to record your score");
+        
+    }
+}
+
 startBtn.addEventListener("click", quizStart);
 aBtn.addEventListener("click", aBtnFunc);
 bBtn.addEventListener("click", bBtnFunc);
+cBtn.addEventListener("click", cBtnFunc);
+dBtn.addEventListener("click", dBtnFunc);
