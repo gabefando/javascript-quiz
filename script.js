@@ -10,22 +10,29 @@ var question = document.getElementById("question");
 var desc = document.getElementById("desc");
 var questionNum = 0;
 var aBtnClicked = 0;
+var bBtnClicked = 0;
+var points = 0;
+var t = 0;
 
 quizBtns.style.display = "none";
 timer.style.display = "none";
 score.style.display = "none";
 
-
 function quizStart() {
     desc.style.display = "none";
     question.style.display = "block";
-    console.log("quiz started");
     startBtn.style.display = "none";
     quizBtns.style.display = "block";
-    var t = 6;
+    score.style.display = "inline";
+    aBtn.classList.remove("hiddenBtn");
+    bBtn.classList.remove("hiddenBtn");
+    cBtn.classList.remove("hiddenBtn");
+    dBtn.classList.remove("hiddenBtn");
+    aBtnClicked = 0;
+    bBtnClicked = 0;
+    t = 31;
     questionNum += 1;
     if (questionNum == 1) {
-        console.log(questionNum)
         question.innerHTML = "1. Which of the following ways of making a variable is correct?";
         aBtn.innerHTML = "var x = example;";
         bBtn.innerHTML = "variable x = example;";
@@ -57,17 +64,41 @@ function quizStart() {
 function aBtnFunc() {
     aBtnClicked += 1;
     if (aBtnClicked == 1 && questionNum == 1) {
-        console.group("next question");
+        points += 100;
+        score.innerHTML = points;
+        t = 31;
         questionNum += 1;
         question.innerHTML = "2. Is JavaScript the same as Java?";
         aBtn.innerHTML = "Yes";
         bBtn.innerHTML = "No";
-        cBtn.style.display = "none";
-        dBtn.style.display = "none";
+        cBtn.classList.add("hiddenBtn");
+        dBtn.classList.add("hiddenBtn");
     } else {
-        // 
+        points -= 20;
+        score.innerHTML = points;
+    }
+}
+
+function bBtnFunc() {
+    bBtnClicked += 1;
+    if (bBtnClicked == 1 && questionNum == 2) {
+        points += 100;
+        score.innerHTML = points;
+        t = 31;
+        questionNum += 1;
+        question.innerHTML = "3. JavaScript has the file extension of";
+        aBtn.innerHTML = ".javscript";
+        bBtn.innerHTML = ".xml";
+        cBtn.innerHTML = ".java";
+        dBtn.innerHTML = ".js";
+        cBtn.classList.remove("hiddenBtn");
+        dBtn.classList.remove("hiddenBtn");
+    } else {
+        points -= 20;
+        score.innerHTML = points;
     }
 }
 
 startBtn.addEventListener("click", quizStart);
 aBtn.addEventListener("click", aBtnFunc);
+bBtn.addEventListener("click", bBtnFunc);
