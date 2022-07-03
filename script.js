@@ -14,8 +14,11 @@ var bBtnClicked = 0;
 var dBtnClicked = 0;
 var points = 0;
 var t = 0;
+aBtn.classList.add("hiddenBtn");
+bBtn.classList.add("hiddenBtn");
+cBtn.classList.add("hiddenBtn");
+dBtn.classList.add("hiddenBtn");
 
-quizBtns.style.display = "none";
 timer.style.display = "none";
 score.style.display = "none";
 
@@ -23,7 +26,6 @@ function quizStart() {
     desc.style.display = "none";
     question.style.display = "block";
     startBtn.style.display = "none";
-    quizBtns.style.display = "block";
     score.style.display = "inline";
     aBtn.classList.remove("hiddenBtn");
     bBtn.classList.remove("hiddenBtn");
@@ -113,20 +115,26 @@ function dBtnFunc() {
         score.innerHTML = points;
         t = 31;
         questionNum += 1;
-        window.location.href = "./leaderboard.html";
         recordScore();
     }
 }
 
+
 function recordScore() {
     var nameput = document.getElementById("name");
-    var scoreput = document.getElementById("score")
+    var scoreput = document.getElementById("scoreput");
     var ask = confirm("Do you want to save your score to the leaderboard?");
     if (ask == true) {
         var nameInput = prompt("Write your initials to record your score");
-        
+        const insdNamePut = document.createElement("p");
+        const insdScorePut = document.createElement("p");
+        insdNamePut.innerHTML = nameInput;
+        insdScorePut.innerHTML = points;
+        nameput.appendChild(insdNamePut);
+        scoreput.appendChild(insdScorePut);
     }
 }
+
 
 startBtn.addEventListener("click", quizStart);
 aBtn.addEventListener("click", aBtnFunc);
